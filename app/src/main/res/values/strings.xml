@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">GSG Sample</string>
+    <string name="user_led0">User LED 0</string>
+    <string name="description">This example makes the User LED 0 to blink with a specific period.</string>
+    <string name="blinking_period">Blinking period (ms)</string>
+    <string name="start_blink">Start blinking</string>
+    <string name="stop_blink">Stop blinking</string>
+    <string name="default_blink_value">1000</string>
+</resources>
