@@ -1,4 +1,4 @@
-GSG Sample Application
+Getting Started Sample Application
 =======================
 
 This application is part of the ConnectCore 6 Getting Started Guide for 
