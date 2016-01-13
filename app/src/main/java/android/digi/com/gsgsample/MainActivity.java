@@ -15,17 +15,18 @@ package android.digi.com.gsgsample;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.gpio.GPIO;
-import android.gpio.GPIOException;
-import android.gpio.GPIOManager;
-import android.gpio.GPIOMode;
-import android.gpio.GPIOValue;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.digi.android.gpio.GPIO;
+import com.digi.android.gpio.GPIOException;
+import com.digi.android.gpio.GPIOManager;
+import com.digi.android.gpio.GPIOMode;
+import com.digi.android.gpio.GPIOValue;
 
 /**
  * GSG Sample application.
@@ -86,7 +87,7 @@ public class MainActivity extends Activity {
 	 */
 	private void initializeGPIOs() {
 		// Get the GPIO manager.
-		GPIOManager gpioManager = (GPIOManager) getSystemService(GPIO_SERVICE);
+		GPIOManager gpioManager = new GPIOManager(this);
 		try {
 			ledGPIO = gpioManager.createGPIO(GPIO_LED, GPIOMode.OUTPUT_HIGH);
 		} catch (GPIOException e) {
