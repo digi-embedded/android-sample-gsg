@@ -45,6 +45,7 @@ public class MainActivity extends Activity {
 	private GPIO ledGPIO;
 
 	private EditText blinkText;
+
 	private Button blinkButton;
 
 	private boolean blinking = false;
@@ -70,6 +71,14 @@ public class MainActivity extends Activity {
 
 		ledGPIO = null;
 		super.onDestroy();
+	}
+
+	@Override
+	protected void onPause() {
+		// Stop the blinking process.
+		stopBlinking();
+
+		super.onPause();
 	}
 
 	/**
@@ -147,11 +156,11 @@ public class MainActivity extends Activity {
 		else {
 			try {
 				period = Integer.parseInt(blinkText.getText().toString());
+				if (period <= 0)
+					validNumber = false;
 			} catch (NumberFormatException e) {
 				validNumber = false;
 			}
-			if (period <= 0)
-				validNumber = false;
 		}
 
 		if (validNumber) {
@@ -180,6 +189,9 @@ public class MainActivity extends Activity {
 	 * based on the period value.
 	 */
 	private void startBlinking() {
+		if (blinking)
+			return;
+
 		blinking = true;
 
 		blinkingThread = new Thread() {
@@ -223,6 +235,9 @@ public class MainActivity extends Activity {
 	 * thread.
 	 */
 	private void stopBlinking() {
+		if (!blinking)
+			return;
+
 		blinking = false;
 
 		if (blinkingThread != null)
