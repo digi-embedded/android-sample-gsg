@@ -51,7 +51,8 @@
                 android:layout_weight="7"
                 android:orientation="vertical"
                 android:background="@color/colorCoorpGray"
-                android:padding="5dp">
+                android:padding="5dp"
+                android:focusableInTouchMode="true">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -80,7 +81,18 @@
                     android:editable="false"
                     android:textSize="32sp"
                     android:paddingStart="10dip" />
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/period_description"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:layout_marginTop="5dip"
+                    android:id="@+id/textView"
+                    android:layout_gravity="right"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorCoorpDarkGray"
+                    android:gravity="right" />
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

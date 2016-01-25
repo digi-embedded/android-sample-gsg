@@ -6,4 +6,5 @@
     <string name="start_blink">Start blinking</string>
     <string name="stop_blink">Stop blinking</string>
     <string name="default_blink_value">1000</string>
+    <string name="period_description">Period value must be between 100 and 10000.</string>
 </resources>

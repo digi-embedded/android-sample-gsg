@@ -41,6 +41,8 @@ public class MainActivity extends Activity {
 
 	// Constants.
 	private final static int GPIO_LED = 34;
+	private final static int MIN_PERIOD = 100;
+	private final static int MAX_PERIOD = 10000;
 
 	// Variables.
 	private GPIO ledGPIO;
@@ -107,7 +109,6 @@ public class MainActivity extends Activity {
 
 		// Set focus to the button.
 		blinkButton.setFocusable(true);
-		blinkButton.setFocusableInTouchMode(true);///add this line
 		blinkButton.requestFocus();
 
 		blinkingPeriod = Integer.parseInt(getResources().getString(R.string.default_blink_value));
@@ -157,7 +158,7 @@ public class MainActivity extends Activity {
 		else {
 			try {
 				period = Integer.parseInt(blinkText.getText().toString());
-				if (period <= 0)
+				if (period < MIN_PERIOD || period > MAX_PERIOD)
 					validNumber = false;
 			} catch (NumberFormatException e) {
 				validNumber = false;
@@ -180,9 +181,6 @@ public class MainActivity extends Activity {
 			stopBlinking();
 		else
 			startBlinking();
-
-		// When the blinking process is running, the edit text control should be disabled.
-		blinkText.setEnabled(!blinking);
 	}
 
 	/**
@@ -229,6 +227,8 @@ public class MainActivity extends Activity {
 		// Update the button status.
 		blinkButton.setText(getResources().getString(R.string.stop_blink));
 		blinkButton.setBackgroundColor(getResources().getColor(R.color.colorCoorpOrange));
+		// Disable the edit text.
+		blinkText.setEnabled(false);
 	}
 
 	/**
@@ -250,6 +250,8 @@ public class MainActivity extends Activity {
 		// Update the button status.
 		blinkButton.setText(getResources().getString(R.string.start_blink));
 		blinkButton.setBackgroundColor(getResources().getColor(R.color.colorCoorpGreen));
+		// Enable the edit text.
+		blinkText.setEnabled(true);
 	}
 
 	/**
