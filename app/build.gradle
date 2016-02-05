@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "android.digi.com.gsgsample"
+        applicationId "com.digi.android.sample.gsg"
         minSdkVersion 22
         targetSdkVersion 22
         versionCode 1
