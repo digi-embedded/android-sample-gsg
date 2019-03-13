@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, Digi International Inc. <support@digi.com>
+ * Copyright (c) 2016-2019, Digi International Inc. <support@digi.com>
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -25,6 +25,8 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.digi.android.gpio.GPIO;
 import com.digi.android.gpio.GPIOException;
@@ -44,7 +46,10 @@ import com.digi.android.gpio.GPIOValue;
 public class MainActivity extends Activity {
 
 	// Constants.
-	private final static int GPIO_LED = 34;
+	private final static int GPIO_LED_CC6SBC = 34;
+	private final static int GPIO_LED_CC8XSBCPRO = 222;
+
+	private final static int GPIO_LED = getLEDGPIO();
 	private final static int MIN_PERIOD = 100;
 	private final static int MAX_PERIOD = 10000;
 
@@ -54,6 +59,8 @@ public class MainActivity extends Activity {
 	private EditText blinkText;
 
 	private Button blinkButton;
+
+	private ImageView boardImage;
 
 	private boolean blinking = false;
 
@@ -65,6 +72,12 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		if (GPIO_LED == -1) {
+			Toast.makeText(getApplicationContext(), "ERROR: Unknown board type",
+					Toast.LENGTH_LONG).show();
+			finish();
+		}
 
 		// Initialize application control and GPIO.
 		initializeControls();
@@ -110,10 +123,14 @@ public class MainActivity extends Activity {
 		// Declare views by retrieving them with the ID.
 		blinkText = (EditText)findViewById(R.id.blink_text);
 		blinkButton = (Button)findViewById(R.id.blink_button);
+		boardImage = (ImageView)findViewById(R.id.board_image);
 
 		// Set focus to the button.
 		blinkButton.setFocusable(true);
 		blinkButton.requestFocus();
+
+		// Set correct board image.
+		boardImage.setImageResource(getBoardImageResourceID());
 
 		blinkingPeriod = Integer.parseInt(getResources().getString(R.string.default_blink_value));
 
@@ -278,6 +295,36 @@ public class MainActivity extends Activity {
 				});
 		AlertDialog alert = builder.create();
 		alert.show();
+	}
+
+	/**
+	 * Returns the the resource ID of the board image to draw depending on the board the sample is
+	 * running on.
+	 *
+	 * @return The resource ID of the board image to draw depending on the board the sample is
+	 *         running on.
+	 */
+	private int getBoardImageResourceID() {
+		if (BoardUtils.isMX8XSBCPRO())
+			return R.drawable.ccimx8x_sbc_pro_board;
+		if (BoardUtils.isMX6SBC())
+			return R.drawable.ccimx6_sbc_board;
+		else
+			return R.drawable.digi_icon;
+	}
+
+	/**
+	 * Returns the GPIO LED number based on the board the sample is running on.
+	 *
+	 * @return The GPIO LED number based on the board the sample is running on.
+	 */
+	private static int getLEDGPIO() {
+		if (BoardUtils.isMX8XSBCPRO())
+			return GPIO_LED_CC8XSBCPRO;
+		if (BoardUtils.isMX6SBC())
+			return GPIO_LED_CC6SBC;
+		else
+			return -1;
 	}
 }
 

@@ -122,7 +122,6 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
-                android:src="@drawable/sbc_board"
                 tools:ignore="ContentDescription" />
         </LinearLayout>
     </LinearLayout>
