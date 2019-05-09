@@ -47,7 +47,7 @@ public class MainActivity extends Activity {
 
 	// Constants.
 	private final static int GPIO_LED_CC6SBC = 34;
-	private final static int GPIO_LED_CC8XSBCPRO = 222;
+	private final static int GPIO_LED_CC8XSBCPRO = 223;
 
 	private final static int GPIO_LED = getLEDGPIO();
 	private final static int MIN_PERIOD = 100;
