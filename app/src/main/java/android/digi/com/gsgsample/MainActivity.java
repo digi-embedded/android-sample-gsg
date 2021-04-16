@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2016-2019, Digi International Inc. <support@digi.com>
+/*
+ * Copyright (c) 2016-2021, Digi International Inc. <support@digi.com>
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -19,6 +19,7 @@ package android.digi.com.gsgsample;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -46,6 +47,9 @@ import com.digi.android.gpio.GPIOValue;
 public class MainActivity extends Activity {
 
 	// Constants.
+	private final static String CCIMX6SBC_NAME = "ccimx6sbc";
+	private final static String CCIMX8XSBCPRO_NAME = "ccimx8xsbcpro";
+
 	private final static int GPIO_LED_CC6SBC = 34;
 	private final static int GPIO_LED_CC8XSBCPRO = 223;
 
@@ -305,12 +309,12 @@ public class MainActivity extends Activity {
 	 *         running on.
 	 */
 	private int getBoardImageResourceID() {
-		if (BoardUtils.isMX8XSBCPRO())
+		if (Build.DEVICE.equals(CCIMX8XSBCPRO_NAME))
 			return R.drawable.ccimx8x_sbc_pro_board;
-		if (BoardUtils.isMX6SBC())
+		if (Build.DEVICE.equals(CCIMX6SBC_NAME))
 			return R.drawable.ccimx6_sbc_board;
-		else
-			return R.drawable.digi_icon;
+
+		return R.drawable.digi_icon;
 	}
 
 	/**
@@ -319,12 +323,12 @@ public class MainActivity extends Activity {
 	 * @return The GPIO LED number based on the board the sample is running on.
 	 */
 	private static int getLEDGPIO() {
-		if (BoardUtils.isMX8XSBCPRO())
+		if (Build.DEVICE.equals(CCIMX8XSBCPRO_NAME))
 			return GPIO_LED_CC8XSBCPRO;
-		if (BoardUtils.isMX6SBC())
+		if (Build.DEVICE.equals(CCIMX6SBC_NAME))
 			return GPIO_LED_CC6SBC;
-		else
-			return -1;
+
+		return -1;
 	}
 }
 
