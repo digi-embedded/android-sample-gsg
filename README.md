@@ -46,7 +46,7 @@ Compatible with
 License
 -------
 
-Copyright (c) 2016-2019, Digi International Inc. <support@digi.com>
+Copyright (c) 2016-2021, Digi International Inc. <support@digi.com>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
