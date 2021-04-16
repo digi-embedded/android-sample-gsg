@@ -64,8 +64,6 @@ public class MainActivity extends Activity {
 
 	private Button blinkButton;
 
-	private ImageView boardImage;
-
 	private boolean blinking = false;
 
 	private int blinkingPeriod;
@@ -125,9 +123,9 @@ public class MainActivity extends Activity {
 	 */
 	private void initializeControls() {
 		// Declare views by retrieving them with the ID.
-		blinkText = (EditText)findViewById(R.id.blink_text);
-		blinkButton = (Button)findViewById(R.id.blink_button);
-		boardImage = (ImageView)findViewById(R.id.board_image);
+		blinkText = findViewById(R.id.blink_text);
+		blinkButton = findViewById(R.id.blink_button);
+		ImageView boardImage = findViewById(R.id.board_image);
 
 		// Set focus to the button.
 		blinkButton.setFocusable(true);
@@ -223,8 +221,6 @@ public class MainActivity extends Activity {
 			@Override
 			public void run() {
 				while (blinking) {
-					if (!blinking)
-						break;
 					try {
 						// Change the status of the LED and toggle the value.
 						ledGPIO.setValue(ledStatus);
@@ -235,7 +231,7 @@ public class MainActivity extends Activity {
 						// Sleep period/2
 						try {
 							Thread.sleep(blinkingPeriod/2);
-						} catch (InterruptedException e) { }
+						} catch (InterruptedException ignored) { }
 					} catch (final GPIOException e) {
 						blinking = false;
 						runOnUiThread(new Runnable() {
