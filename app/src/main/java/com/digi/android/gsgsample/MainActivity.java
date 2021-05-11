@@ -38,8 +38,8 @@ import com.digi.android.gpio.GPIOValue;
 /**
  * GSG Sample application.
  *
- * <p>This example demonstrates the usage of the GPIO
- * API by blinking the User 0 LED of the SBC device.</p>
+ * <p>This example demonstrates the usage of the GPIO API by blinking an
+ * LED of the device.</p>
  *
  * <p>For a complete description on the example, refer to the 'README.md' file
  * included in the example directory.</p>
@@ -49,9 +49,11 @@ public class MainActivity extends Activity {
 	// Constants.
 	private final static String CCIMX6SBC_NAME = "ccimx6sbc";
 	private final static String CCIMX8XSBCPRO_NAME = "ccimx8xsbcpro";
+	private final static String CCIMX8MMDVK_NAME = "ccimx8mmdvk";
 
 	private final static int GPIO_LED_CC6SBC = 34;
-	private final static int GPIO_LED_CC8XSBCPRO = 479;
+	private final static int GPIO_LED_CC8XSBCPRO = 479;  // PTD5
+	private final static int GPIO_LED_CC8MMDVK = 51;     // GPIO2_IO19
 
 	private final static int GPIO_LED = getLEDGPIO();
 	private final static int MIN_PERIOD = 100;
@@ -307,6 +309,8 @@ public class MainActivity extends Activity {
 	private int getBoardImageResourceID() {
 		if (Build.DEVICE.equals(CCIMX8XSBCPRO_NAME))
 			return R.drawable.ccimx8x_sbc_pro_board;
+		if (Build.DEVICE.equals(CCIMX8MMDVK_NAME))
+			return R.drawable.ccimx8x_sbc_pro_board;
 		if (Build.DEVICE.equals(CCIMX6SBC_NAME))
 			return R.drawable.ccimx6_sbc_board;
 
@@ -321,6 +325,8 @@ public class MainActivity extends Activity {
 	private static int getLEDGPIO() {
 		if (Build.DEVICE.equals(CCIMX8XSBCPRO_NAME))
 			return GPIO_LED_CC8XSBCPRO;
+		if (Build.DEVICE.equals(CCIMX8MMDVK_NAME))
+			return GPIO_LED_CC8MMDVK;
 		if (Build.DEVICE.equals(CCIMX6SBC_NAME))
 			return GPIO_LED_CC6SBC;
 

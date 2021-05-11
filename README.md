@@ -1,17 +1,16 @@
 Getting Started Sample Application
-=======================
+==================================
 
-This application is part of the ConnectCore 6 Getting Started Guide for 
-Android. It demonstrates the usage of the GPIO API by blinking the User 
-LED 0 of the SBC device.
+This application is part of the Get Started for Digi Embedded for Android.
+It demonstrates the usage of the GPIO API by blinking an LED of the device.
 
 Demo requirements
 -----------------
 
 To run this example you need:
 
-* One compatible device to host the application.
-* A USB connection between the device and the host PC in order to transfer and
+* A compatible development board to host the application.
+* A USB connection between the board and the host PC in order to transfer and
   launch the application.
 
 Demo setup
@@ -19,22 +18,27 @@ Demo setup
 
 Make sure the hardware is set up correctly:
 
-1. The device is powered on.
-2. The device is connected directly to the PC by the micro USB cable.
+1. The development board is powered on.
+2. The board is connected directly to the PC by the micro USB cable.
 
 Demo run
 --------
 
-The example is already configured, so all you need to do is to build and 
+The example is already configured, so all you need to do is to build and
 launch the project.
 
-The application allows you to start and stop a process that will make the 
-User LED 0 of the SBC board to blink with a specific period. It displays 
-the location of the User LED 0 within the board.
+The application allows you to start and stop a process that will make an
+LED of the board to blink with a specific period. It displays the location of
+the LED within the board:
 
-Configure the blinking period (ms) and then click the "Start Blinking" button 
-in order to start the blinking process. You will see the User LED 0 blinking 
-in the physical board. Click the "Stop Blinking" button to stop the process.
+* ConnectCore 8X SBC Pro:
+     * User LED 0 (PTD5)
+* ConnectCore 8M Mini Development Kit:
+     * User LED 3 (GPIO2_IO19)
+
+Configure the blinking period (ms) and then click the "Start Blinking" button
+in order to start the blinking process. You will see the LED blinking in the
+physical board. Click the "Stop Blinking" button to stop the process.
 
 Compatible with
 ---------------
@@ -42,6 +46,7 @@ Compatible with
 * ConnectCore 6 SBC
 * ConnectCore 6 SBC v3
 * ConnectCore 8X SBC Pro
+* ConnectCore 8M Mini Development Kit
 
 License
 -------
