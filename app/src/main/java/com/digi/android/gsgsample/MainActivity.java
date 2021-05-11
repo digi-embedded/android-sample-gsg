@@ -14,7 +14,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package android.digi.com.gsgsample;
+package com.digi.android.gsgsample;
 
 import android.app.Activity;
 import android.app.AlertDialog;
