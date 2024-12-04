@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2021, Digi International Inc. <support@digi.com>
+ * Copyright (c) 2016-2025, Digi International Inc. <support@digi.com>
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -18,12 +18,10 @@ package com.digi.android.gsgsample;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -114,8 +112,12 @@ public class MainActivity extends Activity {
 		try {
 			ledGPIO = gpioManager.createGPIO(GPIO_LED, GPIOMode.OUTPUT_HIGH);
 		} catch (GPIOException e) {
-			displayError("Error initializing GPIO: " + e.getMessage());
+			Toast.makeText(getApplicationContext(),
+					"Error initializing GPIO: " + e.getMessage(),
+					Toast.LENGTH_LONG).show();
+			finish();
 		}
+
 		// Initialize LED to a known status (off).
 		resetLEDStatus();
 	}
@@ -152,12 +154,7 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		blinkButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				handleBlinkButtonPressed();
-			}
-		});
+		blinkButton.setOnClickListener(view -> handleBlinkButtonPressed());
 	}
 
 	/**
@@ -236,12 +233,7 @@ public class MainActivity extends Activity {
 						} catch (InterruptedException ignored) { }
 					} catch (final GPIOException e) {
 						blinking = false;
-						runOnUiThread(new Runnable() {
-							@Override
-							public void run() {
-								displayError("Error setting GPIO value: " + e.getMessage());
-							}
-						});
+						runOnUiThread(() -> displayError("Error setting GPIO value: " + e.getMessage()));
 					}
 				}
 			}
@@ -289,11 +281,9 @@ public class MainActivity extends Activity {
 
 		builder.setPositiveButton(
 				"OK",
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						dialog.cancel();
-						finish();
-					}
+				(dialog, id) -> {
+					dialog.cancel();
+					finish();
 				});
 		AlertDialog alert = builder.create();
 		alert.show();
@@ -307,14 +297,16 @@ public class MainActivity extends Activity {
 	 *         running on.
 	 */
 	private int getBoardImageResourceID() {
-		if (Build.DEVICE.equals(CCIMX8XSBCPRO_NAME))
-			return R.drawable.ccimx8x_sbc_pro_board;
-		if (Build.DEVICE.equals(CCIMX8MMDVK_NAME))
-			return R.drawable.ccimx8m_dvk_board;
-		if (Build.DEVICE.equals(CCIMX6SBC_NAME))
-			return R.drawable.ccimx6_sbc_board;
-
-		return R.drawable.digi_icon;
+		switch (Build.DEVICE) {
+			case CCIMX8XSBCPRO_NAME:
+				return R.drawable.ccimx8x_sbc_pro_board;
+			case CCIMX8MMDVK_NAME:
+				return R.drawable.ccimx8m_dvk_board;
+			case CCIMX6SBC_NAME:
+				return R.drawable.ccimx6_sbc_board;
+			default:
+				return R.drawable.digi_icon;
+		}
 	}
 
 	/**
@@ -323,14 +315,16 @@ public class MainActivity extends Activity {
 	 * @return The GPIO LED number based on the board the sample is running on.
 	 */
 	private static int getLEDGPIO() {
-		if (Build.DEVICE.equals(CCIMX8XSBCPRO_NAME))
-			return GPIO_LED_CC8XSBCPRO;
-		if (Build.DEVICE.equals(CCIMX8MMDVK_NAME))
-			return GPIO_LED_CC8MMDVK;
-		if (Build.DEVICE.equals(CCIMX6SBC_NAME))
-			return GPIO_LED_CC6SBC;
-
-		return -1;
+		switch (Build.DEVICE) {
+			case CCIMX8XSBCPRO_NAME:
+				return GPIO_LED_CC8XSBCPRO;
+			case CCIMX8MMDVK_NAME:
+				return GPIO_LED_CC8MMDVK;
+			case CCIMX6SBC_NAME:
+				return GPIO_LED_CC6SBC;
+			default:
+				return -1;
+		}
 	}
 }
 
