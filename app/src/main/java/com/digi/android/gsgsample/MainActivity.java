@@ -50,7 +50,7 @@ public class MainActivity extends Activity {
 	private final static String CCIMX8MMDVK_NAME = "ccimx8mmdvk";
 
 	private final static int GPIO_LED_CC6SBC = 34;
-	private final static int GPIO_LED_CC8XSBCPRO = 479;  // PTD5
+	private final static int GPIO_LED_CC8XSBCPRO = 818;  // PTD5
 	private final static int GPIO_LED_CC8MMDVK = 51;     // GPIO2_IO19
 
 	private final static int GPIO_LED = getLEDGPIO();
